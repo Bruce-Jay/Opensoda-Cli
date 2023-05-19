@@ -4,16 +4,11 @@ This project is powered🚀 by `create-node-cli`, and its project site: https://
 
 ## Install npm dependency
 
-Two ways to install `create-node-cli`, you only need to pick one. For me, the recommended way is proper.
+You can install npm dependencies & do npm link by running these code:
 
 ```bash
-# Recommended.
-npx create-node-cli
-```
-
-```bash
-# OR an alternative global install.
-npm install -g create-node-cli
+npm install
+npm link
 ```
 
 ## How to run
