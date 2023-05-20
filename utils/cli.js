@@ -41,6 +41,12 @@ const flags = {
         default: 'X-lab2017/oss101',
         alias: 'r',
         desc: '需要查询的 github 仓库'
+    },
+    download: {
+        type: 'boolean',
+        default: false,
+        alias: 'd',
+        desc: '是否需要导出'
     }
 };
 
