@@ -10,7 +10,6 @@
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
-const generateWebComponent = require('./utils/generateWebComponent');
 const getGithubRepo = require('./utils/getGithubRepo');
 const downloadResult = require('./utils/downloadResult');
 const { program } = require('commander');
