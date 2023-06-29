@@ -1,3 +1,11 @@
-repo.name: oss101
-repo.url: https://github.com/X-lab2017/oss101
-仓库 "X-lab2017/oss101" 的 fork 数: 147, 和 star 数: 78
+repo_name: oss101,
+repo_url: https://github.com/X-lab2017/oss101,
+forks: 158,
+stars: 83,
+activity: {
+  "2023-02": 20.92,
+  "2023-03": 138.16,
+  "2023-04": 223.32,
+  "2023-05": 273.35
+},
+

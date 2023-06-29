@@ -1,27 +1,6 @@
 const fs = require('fs');
 
-// 保存 console.log 的输出到文件，如果不为空先清空
-function saveLogToFile(log, filePath) {
-    if (fs.existsSync(filePath) && fs.statSync(filePath).size > 0) {
-        fs.writeFileSync(filePath, ''); // 清空文件内容
-    }
-    fs.appendFile(filePath, log + '\n', (err) => {
-        if (err) {
-            console.error('Error occurred while saving log to file:', err);
-        }
-    });
-}
-
-// 重定向 console.log 到文件
-function redirectConsoleLogToFile(filePath) {
-    const originalLog = console.log;
-    console.log = function (message) {
-        saveLogToFile(message, filePath);
-        originalLog.apply(console, arguments);
-    };
-}
-
-module.exports = async function downloadResult(data) {
+module.exports = async function downloadResult(data, options) {
     const outputFolderPath = `./output/${data.repo_author}/`;
     const downloadUrl = outputFolderPath + `${data.repo_name}.txt`;
 
@@ -48,12 +27,25 @@ module.exports = async function downloadResult(data) {
             }
         }
 
-        redirectConsoleLogToFile(downloadUrl);
+        const metricString = JSON.stringify(data.metric, null, 2);
+        // console.log(data.metric);
+        // console.log(metricString);
+        const outputData = 
+`repo_name: ${data.repo_name},
+repo_url: ${data.repo_url},
+forks: ${data.content.forks_count},
+stars: ${data.content.stargazers_count},
+${options.metric}: ${metricString},
 
-        console.log(`repo.name: ${data.repo_name}`);
-        console.log(`repo.url: ${data.repo_url}`);
-        console.log(`仓库 "${data.repo_author}/${data.repo_name}" 的 fork 数: ${data.content.forks_count}, 和 star 数: ${data.content.stargazers_count}`);
+`
 
+        fs.writeFile(downloadUrl, outputData, (err) => {
+            if(err) {
+                console.error("Error writing file: ", err);
+            } else {
+                console.log("File saved successfully.")
+            }
+        })
     } catch (error) {
         console.error('Error occurred while exporting the output: ', error);
         process.exit(1);

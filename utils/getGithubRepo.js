@@ -7,9 +7,9 @@ module.exports = async function getGithubRepo(repository) {
         const repo_name = repository.split('/')[1];
         // 构建 GitHub API 的 URL
         const apiUrl = `https://api.github.com/repos/${repository}`;
-
         // 发送 GET 请求获取仓库信息
         const response = await axios.get(apiUrl);
+        
             
         // 返回 fork 数和 star 数
         const data = {

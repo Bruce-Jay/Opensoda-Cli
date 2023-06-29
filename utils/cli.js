@@ -47,7 +47,18 @@ const flags = {
         default: false,
         alias: 'd',
         desc: '是否需要导出'
-    }
+    },
+	metric: {
+		type: 'string',
+		default: 'OpenRank',
+		alias: 'm',
+		desc: '查询使用什么指标'
+	},
+	metricTrue: {
+		type: 'boolean',
+		default: false,
+		desc: 'metric是否为真'
+	}
 };
 
 const commands = {
