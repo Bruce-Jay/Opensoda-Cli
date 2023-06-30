@@ -1,6 +1,10 @@
 ## About this project
 
+A terminal tool to have a easy view of metrics of popular github repositories. Api in this tool supported by `X-lab2017`.
+
 This project is powered🚀 by `create-node-cli`, and its project site: https://www.npmjs.com/package/create-node-cli
+
+Language: mostly English but some Chinese
 
 ## Install npm dependency
 
@@ -13,18 +17,15 @@ npm link
 
 ## How to run
 
-Type in `opendigger -r` and it will return the fork number & star number of github repository https://github.com/X-lab2017/oss101
+Type in `opendigger -r X-lab2017/oss101 -m openrank` and it will return the fork number, star number, and openrank value of github repository https://github.com/X-lab2017/oss101
 
-If you want to explore an another repo, just type in `opendigger -r [author/repo_name]` to get the information. Here `-r` indicates a following of repository url.
+If you want to explore an another repo, just type in `opendigger -r [author/repo_name] -m openrank` to get the information. Here `-r` indicates a following of repository url, `-m` indicates the metric to be used. For more information of metric, please see README.md file at https://github.com/X-lab2017/open-digger. Hopefully you will be excited at the wonderful world.
 
-For example, you can try with typing in `opendigger -r bruce-jay/bruce-jay` and it will return information of https://github.com/bruce-jay/bruce-jay.
+You can also export your result to local, just to add `-d` choice. Have a try of `opendigger -r X-lab2017/oss101 -m activity -d`, the result will be stored at `.output/[author/repo_name].txt`
 
-## 2023/05/20
+You can also specify a time to search one metric at which time. This command `opendigger -r X-lab2017/oss101 -t 2023-04 -m activity -d` will return the `activity` metric of repository `X-lab2017/oss101` in `2023-04`, and then download the results to your local. You can also search all metrics at which time, just without specifying metric argument. Try command `opendigger -r X-lab2017/oss101 -t 2023-04 -d`, the result will be very exciting!
 
-Added download function.
-
-Type in `opendigger -r [author/repo_name] -d` to export the result to local file! The path is `./output/author/repo_name.txt`
-
+Searching all metrics without specifying time is not supported now, because the output is too large and hand to read.
 
 ## 2023/06/29
 
@@ -35,5 +36,12 @@ Type in `opendigger -r [author/repo_name] -m [metric]` to explore the metrics of
 To explore all metrics, please see README.md file at https://github.com/X-lab2017/open-digger. And I'm very appreciated of you to contribute to it!
 
 You can also type in `opendigger -r [author/repo_name] -t [time]` to see all metrics in one period. But you can't get result with only `opendigger -r [author/repo_name]` now, because the data is too much.
+
+## 2023/05/20
+
+Added download function.
+
+Type in `opendigger -r [author/repo_name] -d` to export the result to local file! The path is `./output/author/repo_name.txt`
+
 
 More features coming soon~
