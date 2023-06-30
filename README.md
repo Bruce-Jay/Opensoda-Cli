@@ -32,6 +32,8 @@ Support searching for many metrics.
 
 Type in `opendigger -r [author/repo_name] -m [metric]` to explore the metrics of a repo! To specify a time, you can also add a -t argument. For example, type in `opendigger -r X-lab2017/oss101 -t 2023-04 -m activity -d` to have a try!
 
+To explore all metrics, please see README.md file at https://github.com/X-lab2017/open-digger. And I'm very appreciated of you to contribute to it!
+
 You can also type in `opendigger -r [author/repo_name] -t [time]` to see all metrics in one period. But you can't get result with only `opendigger -r [author/repo_name]` now, because the data is too much.
 
 More features coming soon~
