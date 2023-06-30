@@ -43,7 +43,7 @@ ${options.metric}: ${metricString},
             if(err) {
                 console.error("Error writing file: ", err);
             } else {
-                console.log("File saved successfully.")
+                console.log(`File saved successfully at ${downloadUrl}`);
             }
         })
     } catch (error) {

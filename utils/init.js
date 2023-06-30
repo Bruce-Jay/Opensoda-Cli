@@ -5,7 +5,7 @@ const unhandled = require('cli-handle-unhandled');
 module.exports = ({ clear = true }) => {
 	unhandled();
 	welcome({
-		title: `test-cli`,
+		title: `Opensoda-Cli`,
 		tagLine: `by Yiren Lin`,
 		description: pkg.description,
 		version: pkg.version,
