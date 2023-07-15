@@ -15,7 +15,7 @@
 
 ## 项目的结构和主要功能
 
-'''
+```
 Opensoda-Cli
 ├── README.md
 ├── index.js # main class 所在的文件
@@ -34,7 +34,7 @@ Opensoda-Cli
     ├── getAllMetrics.js # 用于获取某个仓库的所有指标
     ├── init.js # 项目的初始化信息
     └── log.js # 日志配置文件
-'''
+```
 
 目前我们的工具已经实现了两个主要功能:查找指定仓库的信息以及导出项目到本地。
 
