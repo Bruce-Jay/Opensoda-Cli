@@ -8,8 +8,7 @@
 项目所用的技术栈: Javascript, node version >= v16.17
 
 项目的 npm 地址 https://www.npmjs.com/package/opensoda-cli 之前发布了，但是好像在 npm 里面
-搜索还没有显示出来，准备过一段时间再看。反正至少可以根据 github 安装。 这是一个说明文档。同时我在 github 上面的 README 文件可以作为该文档的补充(不过不多，就是开
-发的一个时间记录)。
+搜索还没有显示出来，准备过一段时间再看。反正至少可以根据 github 安装。 这是一个说明文档。同时我在 github 上面的 README 文件可以作为该文档的补充(不过不多，就是开发的一个时间记录)。
 
 <img width="788" alt="image" src="https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/2af19d9e-c28e-4b90-a09d-3b7a5fc93448">
 

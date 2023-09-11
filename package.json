@@ -4,8 +4,8 @@
   "version": "1.0.2",
   "license": "MIT",
   "bin": {
-    "test-cli": "index.js",
-    "opendigger": "index.js"
+    "test-cli": "./index.js",
+    "opendigger": "./index.js"
   },
   "author": "Yiren Lin <yirenlin0218@gmail.com> (https://github.com/bruce-jay)",
   "keywords": [
@@ -29,7 +29,8 @@
     "cli-welcome": "^2.2.2",
     "commander": "^10.0.1",
     "jquery": "^3.7.0",
-    "meow": "^9.0.0"
+    "meow": "^9.0.0",
+    "opensoda-cli": "^1.1.0"
   },
   "devDependencies": {
     "prettier": "^2.8.8"
