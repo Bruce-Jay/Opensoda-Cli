@@ -1,3 +1,9 @@
+# Opensoda-Cli   ![](https://img.shields.io/badge/License-MIT-blue) ![](https://img.shields.io/badge/Node-v18.17.0-blue) [![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)]()
+
+This tool is developed by **LazyAnalysis** group in [Opendigger](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) competition.
+
+![LazyAnalysis](LazyAnalysis.png)
+
 ## About this project
 
 A terminal tool to have a easy view of metrics of popular github repositories. Api in this tool supported by `X-lab2017`.
@@ -6,7 +12,11 @@ This project is powered🚀 by `create-node-cli`, and its project site: https://
 
 Language: mostly English but some Chinese
 
+Node version: 18.17.0
+
 ## Install npm dependency
+
+If you want to run this project by downloading the source code, please install npm dependencies first.
 
 You can install npm dependencies & do npm link by running these code:
 
@@ -44,4 +54,4 @@ Added download function.
 Type in `opendigger -r [author/repo_name] -d` to export the result to local file! The path is `./output/author/repo_name.txt`
 
 
-More features coming soon~
+More features are coming soon~
