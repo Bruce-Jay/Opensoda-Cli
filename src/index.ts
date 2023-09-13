@@ -7,9 +7,9 @@
  * @author Yiren Lin <https://github.com/bruce-jay>
  */
 
-const init = require('./utils/init');
-// const cli = require('./utils/cli');
-// const log = require('./utils/log');
+const init = require('./utils/init')
+const cli = require('./utils/cli');
+const log = require('./utils/log');
 // const getGithubRepo = require('./utils/getGithubRepo');
 import { getGithubRepo } from "./utils/getGithubRepo";
 import { downloadResult } from "./utils/downloadResult";
@@ -23,9 +23,9 @@ const fs = require('fs');
 // 引入 axios 库，用于发送 HTTP 请求
 const axios = require('axios');
 
-// const input = cli.input;
-// const flags = cli.flags;
-// const { clear, debug } = flags;
+const input = cli.input;
+const flags = cli.flags;
+const { clear, debug } = flags;
 
 interface KVData {
     [key: string]: any;
@@ -41,8 +41,8 @@ interface MetricIndexedData {
 
 
 (async () => {
-	// init({ clear });
-	// input.includes(`help`) && cli.showHelp(0);
+	init({ clear });
+	input.includes(`help`) && cli.showHelp(0);
 
     const argv = require('yargs/yargs')(process.argv.slice(2))
     .options({'r': {

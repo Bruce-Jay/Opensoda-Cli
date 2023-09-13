@@ -17,8 +17,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const init = require('./utils/init');
-// const cli = require('./utils/cli');
-// const log = require('./utils/log');
+const cli = require('./utils/cli');
+const log = require('./utils/log');
 // const getGithubRepo = require('./utils/getGithubRepo');
 const getGithubRepo_1 = require("./utils/getGithubRepo");
 const downloadResult_1 = require("./utils/downloadResult");
@@ -30,9 +30,12 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 // 引入 axios 库，用于发送 HTTP 请求
 const axios = require('axios');
+const input = cli.input;
+const flags = cli.flags;
+const { clear, debug } = flags;
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    // init({ clear });
-    // input.includes(`help`) && cli.showHelp(0);
+    init({ clear });
+    input.includes(`help`) && cli.showHelp(0);
     const argv = require('yargs/yargs')(process.argv.slice(2))
         .options({ 'r': {
             alias: 'repository',
