@@ -5,7 +5,7 @@
 
 我们已经做了一个 demo，项目的 github 地址: https://github.com/Bruce-Jay/Opensoda-Cli/tree/master 如果直接 clone 仓库安装，需要运行 `npm install && npm link` 安装依赖并且应用到全局。
 
-项目所用的技术栈: Javascript, node version >= v16.17
+项目所用的技术栈: Javascript, node version = v18.17
 
 项目的 npm 地址 https://www.npmjs.com/package/opensoda-cli 之前发布了，但是好像在 npm 里面
 搜索还没有显示出来，准备过一段时间再看。反正至少可以根据 github 安装。 这是一个说明文档。同时我在 github 上面的 README 文件可以作为该文档的补充(不过不多，就是开发的一个时间记录)。

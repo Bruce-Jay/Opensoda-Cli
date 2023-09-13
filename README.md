@@ -1,4 +1,4 @@
-# Opensoda-Cli   ![](https://img.shields.io/badge/License-MIT-blue) ![](https://img.shields.io/badge/Node-v18.17.0-blue) [![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)]()
+# Opensoda-Cli   ![](https://img.shields.io/badge/License-MIT-blue) ![](https://img.shields.io/badge/Node-v18.17.0-blue) ![](https://img.shields.io/badge/pnpm-v8.6.12-orange) [![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)]()
 
 This tool is developed by **LazyAnalysis** group in [Opendigger](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) competition.
 

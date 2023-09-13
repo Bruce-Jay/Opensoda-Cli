@@ -1,7 +1,7 @@
 // 引入 axios 库，用于发送 HTTP 请求
 const axios = require('axios');
 
-module.exports = async function getMetric(repository, metric) {
+export async function getMetric(repository: string, metric: string) {
     try {
         // 查找指定仓库的 openrank 的 baseUrl
         const baseUrl = `https://oss.x-lab.info/open_digger/github/`;

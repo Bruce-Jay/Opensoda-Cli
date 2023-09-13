@@ -4,8 +4,8 @@
   "version": "1.0.2",
   "license": "MIT",
   "bin": {
-    "test-cli": "./index.js",
-    "opendigger": "./index.js"
+    "test-cli": "./dist/index.js",
+    "opendigger": "./dist/index.js"
   },
   "author": "Yiren Lin <yirenlin0218@gmail.com> (https://github.com/bruce-jay)",
   "keywords": [
@@ -20,6 +20,7 @@
     "format": "prettier --write \"./**/*.{js,json}\""
   },
   "dependencies": {
+    "@types/node": "^20.6.0",
     "axios": "^1.4.0",
     "chalk": "^4.1.2",
     "cli-alerts": "^1.2.2",
@@ -30,7 +31,9 @@
     "commander": "^10.0.1",
     "jquery": "^3.7.0",
     "meow": "^9.0.0",
-    "opensoda-cli": "^1.1.0"
+    "opensoda-cli": "^1.1.0",
+    "typescript": "^5.2.2",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "prettier": "^2.8.8"

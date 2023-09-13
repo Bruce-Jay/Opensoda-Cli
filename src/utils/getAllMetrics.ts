@@ -1,7 +1,7 @@
 // 引入 axios 库，用于发送 HTTP 请求
 const axios = require('axios');
 
-module.exports = async function getAllMetrics(repository) {
+export async function getAllMetrics(repository: string) {
     
     // 查找指定仓库的 baseUrl
     const repoUrl = `https://oss.x-lab.info/open_digger/github/${repository}/`;
@@ -23,7 +23,7 @@ module.exports = async function getAllMetrics(repository) {
             const data = response.data;
             jsonData.push({[fileName]: data});
             console.log(`Fetched data from ${fileName}`);
-        } catch (error) {
+        } catch (error: any) {
             console.error(`Error fetching data from ${fileName}: `, error.message);
         }
     }
