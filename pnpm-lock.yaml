@@ -38,9 +38,6 @@ dependencies:
   meow:
     specifier: ^9.0.0
     version: 9.0.0
-  opensoda-cli:
-    specifier: ^1.1.0
-    version: 1.1.0
   typescript:
     specifier: ^5.2.2
     version: 5.2.2
