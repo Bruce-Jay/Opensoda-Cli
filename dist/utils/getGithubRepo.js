@@ -25,7 +25,7 @@ function getGithubRepo(repository) {
                 repo_author: repo_author,
                 repo_name: repo_name,
                 repo_url: `https://github.com/${repository}`,
-                content: response.data,
+                content: response.data
             };
             return data;
         }

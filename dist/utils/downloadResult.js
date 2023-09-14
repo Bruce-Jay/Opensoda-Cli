@@ -51,7 +51,7 @@ ${argv.m}: ${metricString},
 `;
             fs.writeFile(downloadUrl, outputData, (err) => {
                 if (err) {
-                    console.error("Error writing file: ", err);
+                    console.error('Error writing file: ', err);
                 }
                 else {
                     console.log(`File saved successfully at ${downloadUrl}`);

@@ -17,12 +17,28 @@ function getAllMetrics(repository) {
         // 查找指定仓库的 baseUrl
         const repoUrl = `https://oss.x-lab.info/open_digger/github/${repository}/`;
         // 获取 json 文件
-        const jsonFileNames = ['openrank', 'activity', 'attention', 'active_dates_and_times',
-            'stars', 'technical_fork', 'participants', 'new_contributors',
-            'new_contributors_detail', 'inactive_contributors', 'bus_factor',
-            'bus_factor_detail', 'issues_new', 'issues_closed', 'issue_comments',
-            'code_change_lines_add', 'code_change_lines_remove', 'code_change_lines_sum',
-            'change_requests', 'change_requests_accepted', 'change_requests_reviews',
+        const jsonFileNames = [
+            'openrank',
+            'activity',
+            'attention',
+            'active_dates_and_times',
+            'stars',
+            'technical_fork',
+            'participants',
+            'new_contributors',
+            'new_contributors_detail',
+            'inactive_contributors',
+            'bus_factor',
+            'bus_factor_detail',
+            'issues_new',
+            'issues_closed',
+            'issue_comments',
+            'code_change_lines_add',
+            'code_change_lines_remove',
+            'code_change_lines_sum',
+            'change_requests',
+            'change_requests_accepted',
+            'change_requests_reviews'
         ];
         // 定义一个数组，用于存储每个 JSON 文件的数据
         const jsonData = [];

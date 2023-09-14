@@ -21,10 +21,10 @@ function getMetric(repository, metric) {
             const metricUrl = baseUrl + `${repository}/${metric}.json`;
             // 发送 GET 请求获取信息
             const response = yield axios.get(metricUrl);
-            const data = {
-                metric: response.data
-            };
-            return data;
+            // const data = {
+            // 	metric: response.data
+            // };
+            return response.data;
         }
         catch (error) {
             console.error(`${metric}请求失败: `, error);
