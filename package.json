@@ -4,12 +4,13 @@
   "version": "1.3.0",
   "license": "MIT",
   "bin": {
-    "test-cli": "./dist/index.js",
-    "opendigger": "./dist/index.js"
+    "test-cli": "dist/index.js",
+    "opendigger": "dist/index.js"
   },
   "author": "Yiren Lin <yirenlin0218@gmail.com> (https://github.com/bruce-jay)",
   "keywords": [
-    "test-cli",
+    "opendigger",
+    "LazyAnalysis",
     "Yiren Lin"
   ],
   "files": [

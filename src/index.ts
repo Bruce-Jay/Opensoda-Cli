@@ -40,7 +40,7 @@ interface MetricIndexedData {
 	[metric: string]: any;
 }
 
-(async () => {
+module.exports = (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
 
