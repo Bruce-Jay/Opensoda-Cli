@@ -54,7 +54,7 @@ function printAllMetricOneTime(data, argv) {
         // 不能在 for 循环里面用否则会乱
         const downloadUrl = yield (0, downloadAllMetrics_1.getDownloadPath)(data, time);
         if (argv.d) {
-            yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, argv);
+            yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, time);
         }
         // 由于返回的是一个数组，所以我们需要逐个将其解析出来
         for (const eachMetric of allMetrics) {

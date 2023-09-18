@@ -59,7 +59,7 @@ export async function printAllMetricOneTime(data: any, argv: any): Promise<void>
     );
     
     if(argv.d) {
-        await downloadAllMetrics(data, argv);
+        await downloadAllMetrics(data, time);
     }
     
 
