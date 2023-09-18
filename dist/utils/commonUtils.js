@@ -36,7 +36,6 @@ function printMetricData(argv) {
 exports.printMetricData = printMetricData;
 function printTimeMetric(time, metric, metricData) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('metricData', metricData);
         const value = metricData[time];
         if (value) {
             console.log(`在特定时间 ${time} 查询的 ${metric} 是 ${value}`);
@@ -53,7 +52,10 @@ function printAllMetricOneTime(data, argv) {
         const time = argv.t;
         console.log(`selected_time: ${time}`);
         // 不能在 for 循环里面用否则会乱
-        const downloadUrl = yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, time);
+        const downloadUrl = (0, downloadAllMetrics_1.getDownloadPath)(data, time);
+        if (argv.d) {
+            yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, argv);
+        }
         // 由于返回的是一个数组，所以我们需要逐个将其解析出来
         for (const eachMetric of allMetrics) {
             // 把两个 data 合并, 因为后面需要下载。其实这里一是为了和以上的 fork 与 star 的输出保持一致，二是方便获取repo link
@@ -80,10 +82,8 @@ function printAllMetricOneTime(data, argv) {
                     process.exit(1);
                 }
             }
-            else {
-                // 不保存，直接在控制台上打印
-                console.log(kv);
-            }
+            // 无论保不保存，直接在控制台上打印
+            console.log(kv);
         }
     });
 }

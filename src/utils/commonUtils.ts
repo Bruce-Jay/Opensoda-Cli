@@ -1,4 +1,4 @@
-import { downloadAllMetrics } from "./downloadAllMetrics";
+import { downloadAllMetrics, getDownloadPath } from "./downloadAllMetrics";
 import { getAllMetrics } from "./getAllMetrics";
 import { getMetric } from "./getMetric";
 const fs = require('fs');
@@ -35,7 +35,6 @@ export async function printMetricData(argv: any): Promise<TimeIndexedData> {
 }
 
 export async function printTimeMetric(time: string, metric: string, metricData: TimeIndexedData): Promise<void> {
-    console.log('metricData', metricData)
     const value: string = metricData[time]
     if (value) {
         console.log(
@@ -53,10 +52,16 @@ export async function printAllMetricOneTime(data: any, argv: any): Promise<void>
     const time: string = argv.t;
     console.log(`selected_time: ${time}`);
     // 不能在 for 循环里面用否则会乱
-    const downloadUrl: string = await downloadAllMetrics(
+    
+    const downloadUrl: string = getDownloadPath(
         data,
         time
     );
+    
+    if(argv.d) {
+        await downloadAllMetrics(data, argv);
+    }
+    
 
     // 由于返回的是一个数组，所以我们需要逐个将其解析出来
     for (const eachMetric of allMetrics) {
@@ -86,9 +91,9 @@ export async function printAllMetricOneTime(data: any, argv: any): Promise<void>
                 );
                 process.exit(1);
             }
-        } else {
-            // 不保存，直接在控制台上打印
-            console.log(kv);
-        }
+        } 
+        // 无论保不保存，直接在控制台上打印
+        console.log(kv);
+        
     }
 }

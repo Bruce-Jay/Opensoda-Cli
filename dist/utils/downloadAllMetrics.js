@@ -9,8 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.downloadAllMetrics = void 0;
+exports.downloadAllMetrics = exports.getDownloadPath = void 0;
 const fs = require('fs');
+function getDownloadPath(data, time) {
+    const outputFolderPath = `./output/${data.repo_author}/`;
+    const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.txt`;
+    return downloadUrl;
+}
+exports.getDownloadPath = getDownloadPath;
 // 原来想在这里实现写入文件，发现不可行，因为有太多键值，无法一一取出，所以这里就做一个文件写入是否合法检测吧！
 // 同时，因为我们 for 循环里面写入只能 append 所以每次生成一个新的文件需要先清空
 function downloadAllMetrics(data, time) {
@@ -60,7 +66,6 @@ stars: ${data.content.stargazers_count},
                     console.log(`File saved successfully at ${downloadUrl}`);
                 }
             });
-            return downloadUrl;
         }
         catch (error) {
             console.error('Error occurred while exporting the output: ', error);
