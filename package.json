@@ -1,7 +1,7 @@
 {
   "name": "opensoda-cli",
   "description": "Opendigger cli research tool",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "license": "MIT",
   "bin": {
     "test-cli": "dist/index.js",
