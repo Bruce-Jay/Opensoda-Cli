@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-export function getDownloadPath(data: any, time: any) {
+export async function getDownloadPath(data: any, time: any) {
 	const outputFolderPath: string = `./output/${data.repo_author}/`;
 	const downloadUrl: string = outputFolderPath + `${data.repo_name}-${time}.txt`;
 	return downloadUrl

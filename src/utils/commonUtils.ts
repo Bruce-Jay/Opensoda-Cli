@@ -53,7 +53,7 @@ export async function printAllMetricOneTime(data: any, argv: any): Promise<void>
     console.log(`selected_time: ${time}`);
     // 不能在 for 循环里面用否则会乱
     
-    const downloadUrl: string = getDownloadPath(
+    const downloadUrl: string = await getDownloadPath(
         data,
         time
     );

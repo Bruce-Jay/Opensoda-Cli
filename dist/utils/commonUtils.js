@@ -52,7 +52,7 @@ function printAllMetricOneTime(data, argv) {
         const time = argv.t;
         console.log(`selected_time: ${time}`);
         // 不能在 for 循环里面用否则会乱
-        const downloadUrl = (0, downloadAllMetrics_1.getDownloadPath)(data, time);
+        const downloadUrl = yield (0, downloadAllMetrics_1.getDownloadPath)(data, time);
         if (argv.d) {
             yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, argv);
         }
