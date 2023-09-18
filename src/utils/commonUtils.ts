@@ -30,10 +30,12 @@ export async function printMetricData(argv: any): Promise<TimeIndexedData> {
     if (!argv.t) {
         console.log(`需要查询的metric ${metric} 为: `, metricString)
     }
+    
     return metricData
 }
 
-export function printTimeMetric(time: string, metric: string, metricData: TimeIndexedData): void {
+export async function printTimeMetric(time: string, metric: string, metricData: TimeIndexedData): Promise<void> {
+    console.log('metricData', metricData)
     const value: string = metricData[time]
     if (value) {
         console.log(

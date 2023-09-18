@@ -90,7 +90,7 @@ module.exports = (async () => {
         printRepoInfo(data, argv)
 		// 如果 metric 为真，就查询相应的 metric
 		if (argv.m) {
-            const metricData: TimeIndexedData = printMetricData(argv)
+            const metricData: TimeIndexedData = await printMetricData(argv)
             data = Object.assign(data, metricData)
 			if (argv.t) {
                 printTimeMetric(argv.t, argv.m, metricData)

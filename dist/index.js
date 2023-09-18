@@ -32,7 +32,7 @@ const axios = require('axios');
 const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
-(() => __awaiter(void 0, void 0, void 0, function* () {
+module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
     init({ clear });
     input.includes(`help`) && cli.showHelp(0);
     const argv = require('yargs/yargs')(process.argv.slice(2))
@@ -75,7 +75,7 @@ const { clear, debug } = flags;
         (0, commonUtils_1.printRepoInfo)(data, argv);
         // 如果 metric 为真，就查询相应的 metric
         if (argv.m) {
-            const metricData = (0, commonUtils_1.printMetricData)(argv);
+            const metricData = yield (0, commonUtils_1.printMetricData)(argv);
             data = Object.assign(data, metricData);
             if (argv.t) {
                 (0, commonUtils_1.printTimeMetric)(argv.t, argv.m, metricData);

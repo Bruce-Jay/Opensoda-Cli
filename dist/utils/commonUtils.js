@@ -35,13 +35,16 @@ function printMetricData(argv) {
 }
 exports.printMetricData = printMetricData;
 function printTimeMetric(time, metric, metricData) {
-    const value = metricData[time];
-    if (value) {
-        console.log(`在特定时间 ${time} 查询的 ${metric} 是 ${value}`);
-    }
-    else {
-        console.log(`没有找到对应 ${time} 的值`);
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log('metricData', metricData);
+        const value = metricData[time];
+        if (value) {
+            console.log(`在特定时间 ${time} 查询的 ${metric} 是 ${value}`);
+        }
+        else {
+            console.log(`没有找到对应 ${time} 的值`);
+        }
+    });
 }
 exports.printTimeMetric = printTimeMetric;
 function printAllMetricOneTime(data, argv) {
