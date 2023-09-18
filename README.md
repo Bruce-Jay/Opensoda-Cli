@@ -2,7 +2,7 @@
 
 This tool is developed by **LazyAnalysis** group in [Opendigger](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) competition.
 
-![LazyAnalysis](LazyAnalysis.png)
+![LazyAnalysis](public/LazyAnalysis.png)
 
 ## About this project
 

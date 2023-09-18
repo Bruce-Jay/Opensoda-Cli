@@ -2,7 +2,7 @@
 
 本项目由 **LazyAnalysis** 团队开发，该项目是 [Opendigger](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) 大赛决赛作品。
 
-![LazyAnalysis](LazyAnalysis.png)
+![LazyAnalysis](public/LazyAnalysis.png)
 
 ## 关于本项目
 
