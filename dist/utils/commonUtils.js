@@ -54,15 +54,13 @@ function printMetricData(argv) {
 }
 exports.printMetricData = printMetricData;
 function printTimeMetric(time, metric, metricData) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const value = metricData[time];
-        if (value) {
-            console.log(`在特定时间 ${time} 查询的 ${metric} 是 ${value}`);
-        }
-        else {
-            console.log(`没有找到对应 ${time} 的值`);
-        }
-    });
+    const value = metricData[time];
+    if (value) {
+        console.log(`在特定时间 ${time} 查询的 ${metric} 是 ${value}`);
+    }
+    else {
+        console.log(`没有找到对应 ${time} 的值`);
+    }
 }
 exports.printTimeMetric = printTimeMetric;
 function printAllMetricOneTime(data, argv) {
@@ -71,7 +69,7 @@ function printAllMetricOneTime(data, argv) {
         const time = argv.t;
         console.log(`selected_time: ${time}`);
         // 不能在 for 循环里面用否则会乱
-        const downloadUrl = yield (0, downloadAllMetrics_1.getDownloadPath)(data, time);
+        const downloadUrl = (0, downloadAllMetrics_1.getDownloadPath)(data, time);
         if (argv.d) {
             yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, time);
         }

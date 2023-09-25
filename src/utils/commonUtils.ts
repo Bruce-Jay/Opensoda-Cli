@@ -55,7 +55,7 @@ export async function printMetricData(argv: any): Promise<{metricData: MetricInd
     return {metricData, metricString}
 }
 
-export async function printTimeMetric(time: string, metric: string, metricData: TimeIndexedData): Promise<void> {
+export function printTimeMetric(time: string, metric: string, metricData: TimeIndexedData): void {
     const value: string = metricData[time]
     if (value) {
         console.log(
@@ -74,7 +74,7 @@ export async function printAllMetricOneTime(data: any, argv: any): Promise<void>
     console.log(`selected_time: ${time}`);
     // 不能在 for 循环里面用否则会乱
     
-    const downloadUrl: string = await getDownloadPath(
+    const downloadUrl: string = getDownloadPath(
         data,
         time
     );
