@@ -13,7 +13,7 @@ exports.downloadAllMetrics = exports.getDownloadPath = void 0;
 const fs = require('fs');
 function getDownloadPath(data, time) {
     const outputFolderPath = `./output/${data.repo_author}/`;
-    const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.txt`;
+    const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.md`;
     return downloadUrl;
 }
 exports.getDownloadPath = getDownloadPath;
@@ -22,7 +22,7 @@ exports.getDownloadPath = getDownloadPath;
 function downloadAllMetrics(data, time) {
     return __awaiter(this, void 0, void 0, function* () {
         const outputFolderPath = `./output/${data.repo_author}/`;
-        const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.txt`;
+        const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.md`;
         try {
             // 判断 output 文件夹是否存在，如果不存在则创建
             if (!fs.existsSync(outputFolderPath)) {
@@ -38,10 +38,10 @@ function downloadAllMetrics(data, time) {
             if (!fs.existsSync(downloadUrl)) {
                 try {
                     fs.writeFileSync(downloadUrl, '');
-                    console.log(`Created ${data.repo_name}.txt file successfully.`);
+                    console.log(`Created ${data.repo_name}.md file successfully.`);
                 }
                 catch (error) {
-                    console.error(`Error occurred while creating ${data.repo_name}.txt file:`, error);
+                    console.error(`Error occurred while creating ${data.repo_name}.md file:`, error);
                 }
             }
             else {
@@ -52,12 +52,10 @@ function downloadAllMetrics(data, time) {
                     }
                 });
             }
-            const outputData = `selected_time: ${time},
-repo_name: ${data.repo_name},
-repo_url: ${data.repo_url},
-forks: ${data.content.forks_count},
-stars: ${data.content.stargazers_count},
-`;
+            const outputData = `selected_time: ${time},\n` +
+                `repo_author: ${data.repo_author},\n` +
+                `repo_name: ${data.repo_name},\n` +
+                `repo_url: ${data.repo_url},\n`;
             fs.writeFile(downloadUrl, outputData, (err) => {
                 if (err) {
                     console.error('Error writing file: ', err);

@@ -2,7 +2,7 @@ const fs = require('fs');
 
 export function getDownloadPath(data: any, time: any) {
 	const outputFolderPath: string = `./output/${data.repo_author}/`;
-	const downloadUrl: string = outputFolderPath + `${data.repo_name}-${time}.txt`;
+	const downloadUrl: string = outputFolderPath + `${data.repo_name}-${time}.md`;
 	return downloadUrl
 }
 
@@ -10,7 +10,7 @@ export function getDownloadPath(data: any, time: any) {
 // 同时，因为我们 for 循环里面写入只能 append 所以每次生成一个新的文件需要先清空
 export async function downloadAllMetrics(data: any, time: any) {
 	const outputFolderPath = `./output/${data.repo_author}/`;
-	const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.txt`;
+	const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.md`;
 
 	try {
 		// 判断 output 文件夹是否存在，如果不存在则创建
@@ -32,10 +32,10 @@ export async function downloadAllMetrics(data: any, time: any) {
 		if (!fs.existsSync(downloadUrl)) {
 			try {
 				fs.writeFileSync(downloadUrl, '');
-				console.log(`Created ${data.repo_name}.txt file successfully.`);
+				console.log(`Created ${data.repo_name}.md file successfully.`);
 			} catch (error) {
 				console.error(
-					`Error occurred while creating ${data.repo_name}.txt file:`,
+					`Error occurred while creating ${data.repo_name}.md file:`,
 					error
 				);
 			}
@@ -48,12 +48,10 @@ export async function downloadAllMetrics(data: any, time: any) {
 			});
 		}
 
-		const outputData = `selected_time: ${time},
-repo_name: ${data.repo_name},
-repo_url: ${data.repo_url},
-forks: ${data.content.forks_count},
-stars: ${data.content.stargazers_count},
-`;
+		const outputData = `selected_time: ${time},\n` +
+							`repo_author: ${data.repo_author},\n` +
+							`repo_name: ${data.repo_name},\n` +
+							`repo_url: ${data.repo_url},\n`;
 
 		fs.writeFile(downloadUrl, outputData, (err: any) => {
 			if (err) {

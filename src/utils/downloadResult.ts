@@ -1,8 +1,8 @@
-const fs = require('fs');
+import fs from 'fs';
 
-export async function downloadResult(data: any, argv: any) {
+export async function downloadResult(data: any, argv: any, metricString: string) {
 	const outputFolderPath = `./output/${data.repo_author}/`;
-	const downloadUrl = outputFolderPath + `${data.repo_name}.txt`;
+	const downloadUrl = outputFolderPath + `${data.repo_name}.md`;
 
 	try {
 		// 判断 output 文件夹是否存在，如果不存在则创建
@@ -26,25 +26,19 @@ export async function downloadResult(data: any, argv: any) {
 		if (!fs.existsSync(downloadUrl)) {
 			try {
 				fs.writeFileSync(downloadUrl, '');
-				console.log(`Created ${data.repo_name}.txt file successfully.`);
+				console.log(`Created ${data.repo_name}.md file successfully.`);
 			} catch (error) {
 				console.error(
-					`Error occurred while creating ${data.repo_name}.txt file:`,
+					`Error occurred while creating ${data.repo_name}.md file:`,
 					error
 				);
 			}
 		}
 
-		const metricString = JSON.stringify(data.metric, null, 2);
-		// console.log(data.metric);
-		// console.log(metricString);
-		const outputData = `repo_name: ${data.repo_name},
-repo_url: ${data.repo_url},
-forks: ${data.content.forks_count},
-stars: ${data.content.stargazers_count},
-${argv.m}: ${metricString},
-
-`;
+		const outputData = `repo_author: ${data.repo_author}\n` +
+							`repo_name: ${data.repo_name}\n` +
+							`repo_url: ${data.repo_url}\n` + 
+							`metric_name: ${argv.m}\n` + metricString;
 
 		fs.writeFile(downloadUrl, outputData, (err: any) => {
 			if (err) {

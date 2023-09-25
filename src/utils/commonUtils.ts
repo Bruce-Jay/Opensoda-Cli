@@ -15,23 +15,44 @@ interface MetricIndexedData {
 	[metric: string]: any;
 }
 
-export function printRepoInfo(data: any, argv: any): void {
-    const repo_info = `repo.name: ${data.repo_name}
-repo.url: ${data.repo_url}
-仓库 "${argv.r}" 的 fork 数: ${data.content.forks_count}, 和 star 数: ${data.content.stargazers_count}`
-    console.log(repo_info)
+export function printRepoInfo(data: any): void {
+    console.log(`repo.author: ${data.repo_author}`)
+    console.log(`repo.name: ${data.repo_name}`)
+    console.log(`repo.url: ${data.repo_url}`)
 }
 
-export async function printMetricData(argv: any): Promise<TimeIndexedData> {
+function printDataInColumns(data: MetricIndexedData) {
+    let result = ""
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+    // 分成四列打印
+    const rows = Math.ceil(keys.length / 4);
+
+    for (let row = 0; row < rows; row++) {
+        let rowString: string = ``;
+        for (let column = 0; column < 4; column++) {
+            const index = row + column * rows;
+            if (index < keys.length) {
+                const key = keys[index];
+                const value = values[index];
+                rowString += `${key}: ${value.toFixed(2)}\t\t`;
+            }
+        }
+        result += rowString + '\n';
+    }
+
+    return result;
+}
+
+export async function printMetricData(argv: any): Promise<{metricData: MetricIndexedData, metricString: string}> {
     const repo: string = argv.r
     const metric: string = argv.m
     const metricData: TimeIndexedData = await getMetric(repo, metric)
-    const metricString = JSON.stringify(metricData)
+    const metricString = printDataInColumns(metricData);
     if (!argv.t) {
-        console.log(`需要查询的metric ${metric} 为: `, metricString)
+        console.log(`需要查询的 metric ${metric} 为:\n${metricString}`)
     }
-    
-    return metricData
+    return {metricData, metricString}
 }
 
 export async function printTimeMetric(time: string, metric: string, metricData: TimeIndexedData): Promise<void> {

@@ -14,23 +14,42 @@ const downloadAllMetrics_1 = require("./downloadAllMetrics");
 const getAllMetrics_1 = require("./getAllMetrics");
 const getMetric_1 = require("./getMetric");
 const fs = require('fs');
-function printRepoInfo(data, argv) {
-    const repo_info = `repo.name: ${data.repo_name}
-repo.url: ${data.repo_url}
-仓库 "${argv.r}" 的 fork 数: ${data.content.forks_count}, 和 star 数: ${data.content.stargazers_count}`;
-    console.log(repo_info);
+function printRepoInfo(data) {
+    console.log(`repo.author: ${data.repo_author}`);
+    console.log(`repo.name: ${data.repo_name}`);
+    console.log(`repo.url: ${data.repo_url}`);
 }
 exports.printRepoInfo = printRepoInfo;
+function printDataInColumns(data) {
+    let result = "";
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+    // 分成四列打印
+    const rows = Math.ceil(keys.length / 4);
+    for (let row = 0; row < rows; row++) {
+        let rowString = ``;
+        for (let column = 0; column < 4; column++) {
+            const index = row + column * rows;
+            if (index < keys.length) {
+                const key = keys[index];
+                const value = values[index];
+                rowString += `${key}: ${value.toFixed(2)}\t\t`;
+            }
+        }
+        result += rowString + '\n';
+    }
+    return result;
+}
 function printMetricData(argv) {
     return __awaiter(this, void 0, void 0, function* () {
         const repo = argv.r;
         const metric = argv.m;
         const metricData = yield (0, getMetric_1.getMetric)(repo, metric);
-        const metricString = JSON.stringify(metricData);
+        const metricString = printDataInColumns(metricData);
         if (!argv.t) {
-            console.log(`需要查询的metric ${metric} 为: `, metricString);
+            console.log(`需要查询的 metric ${metric} 为:\n${metricString}`);
         }
-        return metricData;
+        return { metricData, metricString };
     });
 }
 exports.printMetricData = printMetricData;

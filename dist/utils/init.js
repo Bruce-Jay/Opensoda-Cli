@@ -1,8 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const welcome = require('cli-welcome');
 const pkg = require('../../package.json');
 const unhandled = require('cli-handle-unhandled');
-module.exports = ({ clear = true }) => {
+const init = ({ clear = true }) => {
     unhandled();
     welcome({
         title: `Opensoda-Cli`,
@@ -15,3 +16,4 @@ module.exports = ({ clear = true }) => {
         clear
     });
 };
+exports.default = init;

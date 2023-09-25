@@ -15,32 +15,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const init = require('./utils/init');
-const cli = require('./utils/cli');
-const log = require('./utils/log');
-// const getGithubRepo = require('./utils/getGithubRepo');
+const init_1 = __importDefault(require("./utils/init"));
+const cli_1 = __importDefault(require("./utils/cli"));
 const getGithubRepo_1 = require("./utils/getGithubRepo");
 const downloadResult_1 = require("./utils/downloadResult");
 const commonUtils_1 = require("./utils/commonUtils");
-const getAllMetrics = require('./utils/getAllMetrics');
-const { program } = require('commander');
-const { execSync } = require('child_process');
-const fs = require('fs');
-// 引入 axios 库，用于发送 HTTP 请求
-const axios = require('axios');
-const input = cli.input;
-const flags = cli.flags;
+const input = cli_1.default.input;
+const flags = cli_1.default.flags;
 const { clear, debug } = flags;
 module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
-    init({ clear });
-    input.includes(`help`) && cli.showHelp(0);
+    (0, init_1.default)({ clear });
+    input.includes(`help`) && cli_1.default.showHelp(0);
     const argv = require('yargs/yargs')(process.argv.slice(2))
         .options({
         r: {
             alias: 'repository',
-            demand: true,
+            demand: false,
             describe: '指定查询的仓库，默认为 X-lab2017/oss101',
+            type: 'string'
+        },
+        u: {
+            alias: 'user',
+            demand: false,
+            describe: '查询特定的用户，默认为 X-lab2017',
             type: 'string'
         },
         d: {
@@ -66,24 +67,24 @@ module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
         .alias('h', 'help')
         .usage('Usage: opendigger [options]')
         .example('opendigger -r X-lab2017/oss101 -d -m openrank -t 2020-01-01', '查询 X-lab2017/oss101 仓库在 2020-01-01 的 openrank 值，并将结果导出到 ./output 文件夹下')
-        .epilog('copyright 2023').argv;
+        .epilog('Copyright © 2023 LazyAnasis. All Rights Reserved.').argv;
     // console.log('argvr', argv.r)
     if (argv.r) {
         // 是否填写仓库名，如果没有填写直接不操作，节约计算资源
-        let data = yield (0, getGithubRepo_1.getGithubRepo)(argv.r);
+        let { data, dataString } = (0, getGithubRepo_1.getGithubRepo)(argv.r);
         // 打印仓库信息
-        (0, commonUtils_1.printRepoInfo)(data, argv);
+        (0, commonUtils_1.printRepoInfo)(data);
         // 如果 metric 为真，就查询相应的 metric
         if (argv.m) {
-            const metricData = yield (0, commonUtils_1.printMetricData)(argv);
-            data = Object.assign(data, metricData);
+            const { metricData, metricString } = yield (0, commonUtils_1.printMetricData)(argv);
+            dataString += metricString;
             if (argv.t) {
                 (0, commonUtils_1.printTimeMetric)(argv.t, argv.m, metricData);
             }
             else {
                 // 如果 download 为真，将其下载到 ./output 的一个文件下
                 if (argv.d) {
-                    yield (0, downloadResult_1.downloadResult)(data, argv);
+                    yield (0, downloadResult_1.downloadResult)(data, argv, metricString);
                 }
             }
         }

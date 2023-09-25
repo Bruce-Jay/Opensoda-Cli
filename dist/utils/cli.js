@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const meow = require('meow');
 const meowHelp = require('cli-meow-help');
 const flags = {
@@ -74,4 +75,5 @@ const options = {
     hardRejection: false,
     flags
 };
-module.exports = meow(helpText, options);
+const cli = meow(helpText, options);
+exports.default = cli;

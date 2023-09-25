@@ -20,7 +20,7 @@ Opensoda-Cli
 ├── index.js # main class 所在的文件
 ├── output # 这个文件夹下存储导出的文件
 │   └── X-lab2017 # 一级子目录，代表仓库的作者
-│       └── oss101.txt # 下属文件名称为仓库名称，文件类型为 txt 
+│       └── oss101.md # 下属文件名称为仓库名称，文件类型为 Markdown
 ├── package-lock.json
 ├── package.json
 ├── templates # 存储项目的组件代码模板 

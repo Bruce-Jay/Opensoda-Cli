@@ -8,18 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadResult = void 0;
-const fs = require('fs');
-function downloadResult(data, argv) {
+const fs_1 = __importDefault(require("fs"));
+function downloadResult(data, argv, metricString) {
     return __awaiter(this, void 0, void 0, function* () {
         const outputFolderPath = `./output/${data.repo_author}/`;
-        const downloadUrl = outputFolderPath + `${data.repo_name}.txt`;
+        const downloadUrl = outputFolderPath + `${data.repo_name}.md`;
         try {
             // 判断 output 文件夹是否存在，如果不存在则创建
-            if (!fs.existsSync(outputFolderPath)) {
+            if (!fs_1.default.existsSync(outputFolderPath)) {
                 try {
-                    fs.mkdirSync(outputFolderPath, { recursive: true });
+                    fs_1.default.mkdirSync(outputFolderPath, { recursive: true });
                     console.log(`Created ${outputFolderPath} directory successfully.`);
                 }
                 catch (error) {
@@ -30,26 +33,20 @@ function downloadResult(data, argv) {
                 console.log(`${outputFolderPath} directory already exists.`);
             }
             // 如果要写入的文件不存在，就创建一个
-            if (!fs.existsSync(downloadUrl)) {
+            if (!fs_1.default.existsSync(downloadUrl)) {
                 try {
-                    fs.writeFileSync(downloadUrl, '');
-                    console.log(`Created ${data.repo_name}.txt file successfully.`);
+                    fs_1.default.writeFileSync(downloadUrl, '');
+                    console.log(`Created ${data.repo_name}.md file successfully.`);
                 }
                 catch (error) {
-                    console.error(`Error occurred while creating ${data.repo_name}.txt file:`, error);
+                    console.error(`Error occurred while creating ${data.repo_name}.md file:`, error);
                 }
             }
-            const metricString = JSON.stringify(data.metric, null, 2);
-            // console.log(data.metric);
-            // console.log(metricString);
-            const outputData = `repo_name: ${data.repo_name},
-repo_url: ${data.repo_url},
-forks: ${data.content.forks_count},
-stars: ${data.content.stargazers_count},
-${argv.m}: ${metricString},
-
-`;
-            fs.writeFile(downloadUrl, outputData, (err) => {
+            const outputData = `repo_author: ${data.repo_author}\n` +
+                `repo_name: ${data.repo_name}\n` +
+                `repo_url: ${data.repo_url}\n` +
+                `metric_name: ${argv.m}\n` + metricString;
+            fs_1.default.writeFile(downloadUrl, outputData, (err) => {
                 if (err) {
                     console.error('Error writing file: ', err);
                 }

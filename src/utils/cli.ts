@@ -78,4 +78,5 @@ const options = {
 	flags
 };
 
-module.exports = meow(helpText, options);
+const cli = meow(helpText, options);
+export default cli;
