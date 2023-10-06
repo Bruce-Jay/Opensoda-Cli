@@ -48,10 +48,13 @@ export async function downloadAllMetrics(data: any, argv: any) {
 			});
 		}
 
-		let outputData = `selected_time: ${argv.t},\n` +
+		let outputData = `# Opendigger Data Analysis - ${data.repo_author}/${data.repo_name}\n` +
+							`### Repo\n` +
+							`selected_time: ${argv.t},\n` +
 							`repo_author: ${data.repo_author},\n` +
 							`repo_name: ${data.repo_name},\n` +
-							`repo_url: ${data.repo_url}\n`;
+							`repo_url: ${data.repo_url}\n` + 
+							`### Metric\n`;
 
 		const allMetrics: MetricIndexedData[] = await getAllMetrics(argv.r)
 		const time: string = argv.t;

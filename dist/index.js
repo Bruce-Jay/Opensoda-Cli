@@ -89,7 +89,7 @@ module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
             else {
                 // 如果 download 为真，将其下载到 ./output 的一个文件下
                 if (argv.d) {
-                    yield (0, downloadResult_1.downloadResult)(data, argv, metricString);
+                    yield (0, downloadResult_1.downloadResult)(data, argv, metricData);
                 }
             }
         }

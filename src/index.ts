@@ -97,7 +97,7 @@ module.exports = (async () => {
 			} else {
 				// 如果 download 为真，将其下载到 ./output 的一个文件下
 				if (argv.d) {
-                    await downloadResult(data, argv, metricString);
+                    await downloadResult(data, argv, metricData);
 				}
 			}
 		} else {

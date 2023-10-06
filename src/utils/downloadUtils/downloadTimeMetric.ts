@@ -45,10 +45,13 @@ export async function downloadTimeMetric(data: any, argv: any, metricData: Metri
 			});
 		}
 
-		let outputData = `selected_time: ${argv.t},\n` +
+		let outputData = `# Opendigger Data Analysis - ${data.repo_author}/${data.repo_name}\n` +
+                            `### Repo\n` +
+                            `selected_time: ${argv.t},\n` +
 							`repo_author: ${data.repo_author},\n` +
 							`repo_name: ${data.repo_name},\n` +
-							`repo_url: ${data.repo_url} \n`;
+							`repo_url: ${data.repo_url} \n` + 
+                            `### Metric & Time\n`;
 
         const TimeMetricData = `在特定时间 ${argv.t} 下, ${argv.m} 的数据为: ${metricData[argv.t]}\n`;
         outputData += TimeMetricData;
