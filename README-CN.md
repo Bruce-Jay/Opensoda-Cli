@@ -1,8 +1,22 @@
-# Opensoda-Cli   ![](https://img.shields.io/badge/License-MIT-blue) ![](https://img.shields.io/badge/Node-v18.17.0-blue) ![](https://img.shields.io/badge/pnpm-v8.6.12-orange) [![](https://img.shields.io/badge/English-purple)](README.md)
+<div align="center">
+<h1 >
+  <br/>Opensoda-Cli
+</h1> 
+
+![](https://img.shields.io/badge/License-MIT-blue) 
+![](https://img.shields.io/badge/Node-v18.17.0-blue) 
+![](https://img.shields.io/badge/pnpm-v8.6.12-orange) 
+[![](https://img.shields.io/badge/English-green)](README.md)
+
+<div align='left'>
 
 本项目由 **LazyAnalysis** 团队开发，该项目是 [Opendigger](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) 大赛决赛作品。
 
+<div align="center">
+
 ![LazyAnalysis](public/LazyAnalysis.png)
+
+<div align='left'>
 
 ## 关于本项目
 
@@ -12,61 +26,67 @@
 
 如果需要顺利地运行本项目，需要您的 node 版本大于或等于 18.17。不过不用担心，我们会把项目打包成 docker 并且发布的。
 
-## 如何运行
+## 安装
 
-如果您通过 git clone 源代码运行本项目，感受该命令行工具的强大力量的时候，请先运行：
+此项目使用pnpm作为包管理工具。在开始之前，确保您已经安装了pnpm, 您可以通过执行`pnpm -v`命令来查看是否已经安装。如果没有安装，执行  `npm i pnpm -g` 即可安装！
 
-```
-npm install
-npm link
-```
+在该项目文件夹下，运行`pnpm install` 和 `pnpm link .`，即可安装opensoda-cli.
 
-安装相关的依赖并且链接到全局。
-
-### 基本命令
-
-运行 `opendigger -r=[author/repo_name] -m=[metric]` 获取某个仓库的特定指标值。
-
-例如，运行 `opendigger -r=X-lab2017/oss101 -m=openrank` 就可以获取 X-lab2017 所有的 oss101 仓库的 openrank 指标值。
-
-```
-$ opendigger -r=X-lab2017/oss101 -m=openrank
-
-Opensoda-Cli  v1.0.2 by LazyAnalysis
-Opendigger cli research tool
-
-repo.name: oss101
-repo.url: https://github.com/X-lab2017/oss101
-仓库 "X-lab2017/oss101" 的 fork 数: 154, 和 star 数: 90
-需要查询的metric openrank 为:  {"2023-02":2.63,"2023-03":18.37,"2023-04":25.21,"2023-05":41.55,"2023-06":26.66,"2023-07":19.22,"2023-08":16.34}
+```bash
+pnpm install
+npm link 
 ```
 
-可以看到，它返回了从 2023-02 到 2023-08 的所有 openrank 值。
+或者，你可以直接通过pnpm安装：
+ ```bash
+ pnpm add opensoda-cli
+ ```
 
-您也可以通过指定时间来查询，比如我需要查询 2023-08 的 openrank 值，只需要加上 -t 选项即可。
+`npm i opensoda-cli -g` 也可以。
 
+### 使用
+
+> 运行 `opendigger -r` 获取功能细节。
+
+基本使用模板：
+#### `opendigger -r <author/repo-name> [-m <metric> -t <time> -d]`
+
+例子：
+
+你可以在终端运行以下命令，获得[`X-lab2017/oss101`](https://github.com/X-lab2017/oss101)的`openrank`值：
+```bash
+opendigger -r X-lab2017/oss101 -m openrank
 ```
-$ opendigger -r=X-lab2017/oss101 -m=openrank -t=2023-08
+![](/public/cut2.gif)
 
-Opensoda-Cli  v1.0.2 by LazyAnalysis
-Opendigger cli research tool
+如果想要查询其他仓库，运行`opendigger -r <author/repo_name> -m openrank`就可以了。这里`-r`表示仓库地址，`-m`表示要查询的指标。
 
-repo.name: oss101
-repo.url: https://github.com/X-lab2017/oss101
-仓库 "X-lab2017/oss101" 的 fork 数: 154, 和 star 数: 90
-需要查询的metric openrank 为:  {"2023-02":2.63,"2023-03":18.37,"2023-04":25.21,"2023-05":41.55,"2023-06":26.66,"2023-07":19.22,"2023-08":16.34}
-在特定时间 2023-08 查询的 openrank 是 16.34
+更多指标，请移步https://github.com/X-lab2017/open-digger#metrics-or-indices-usage。
+
+你也可以加上`-d`选项，来将结果导出。
+
+试试以下命令：
+```bash
+opendigger -r X-lab2017/oss101 -m activity -d
+```
+![](/public/cut1.gif)
+
+结果会保存在 `.opendigger-output/[author/repo_name].md`。
+
+你还可以指定查询时间，查询特定时间的指标。这条指令：
+```bash
+opendigger -r X-lab2017/oss101 -t 2023-07 -m activity -d
 ```
 
-此外，也可以加上 `-d` 选项来选择是否导出到本地。导出目录在 `./output` 下
+将返回仓库`X-lab2017/oss101`2023年7月的`activity`值。
 
-选项汇总
+这款工具还支持查询同一时间的的所有指标，只要不指定`-m`即可。尝试以下指令：
 
-| 选项含义           | 短选项 | 长选项       | 后接参数                                                     |
-| ------------------ | ------ | ------------ | ------------------------------------------------------------ |
-| 查询指定仓库       | -r     | --repository | 仓库名称，需要加上作者名。如 X-lab2017/oss101                |
-| 查询指定指标       | -m     | --metric     | [opendigger](https://github.com/X-lab2017/open-digger) 提供的指标值 |
-| 查询特定时间的结果 | -t     | --time       | 需要查询的时间                                               |
-| 是否导出到本地     | -d     | --download   | 不需要跟参数                                                 |
+```bash
+opendigger -r X-lab2017/oss101 -t 2023-04 -d
+```
+![](/public/cut3.gif)
+
+考虑到输出太大，查询所有时间的所有指标暂时不支持。
 
 项目仍在迭代更新中~
