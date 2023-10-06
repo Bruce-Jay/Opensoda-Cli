@@ -32,6 +32,7 @@
     "cli-meow-help": "^3.1.0",
     "cli-welcome": "^2.2.2",
     "commander": "^10.0.1",
+    "fs": "0.0.1-security",
     "jquery": "^3.7.1",
     "meow": "^9.0.0",
     "typescript": "^5.2.2",

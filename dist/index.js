@@ -22,7 +22,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const init_1 = __importDefault(require("./utils/init"));
 const cli_1 = __importDefault(require("./utils/cli"));
 const getGithubRepo_1 = require("./utils/getGithubRepo");
-const downloadResult_1 = require("./utils/downloadResult");
+const downloadResult_1 = require("./utils/downloadUtils/downloadResult");
+const downloadTimeMetric_1 = require("./utils/downloadUtils/downloadTimeMetric");
+const downloadAllMetrics_1 = require("./utils/downloadUtils/downloadAllMetrics");
 const commonUtils_1 = require("./utils/commonUtils");
 const input = cli_1.default.input;
 const flags = cli_1.default.flags;
@@ -66,7 +68,7 @@ module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
         .help('h')
         .alias('h', 'help')
         .usage('Usage: opendigger [options]')
-        .example('opendigger -r X-lab2017/oss101 -d -m openrank -t 2020-01-01', '查询 X-lab2017/oss101 仓库在 2020-01-01 的 openrank 值，并将结果导出到 ./output 文件夹下')
+        .example('opendigger -r X-lab2017/oss101 -d -m openrank -t 2020-01-01', '查询 X-lab2017/oss101 仓库在 2020-01-01 的 openrank 值，并将结果导出到 ./opendigger-output 文件夹下')
         .epilog('Copyright © 2023 LazyAnasis. All Rights Reserved.').argv;
     // console.log('argvr', argv.r)
     if (argv.r) {
@@ -80,6 +82,9 @@ module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
             dataString += metricString;
             if (argv.t) {
                 (0, commonUtils_1.printTimeMetric)(argv.t, argv.m, metricData);
+                if (argv.d) {
+                    yield (0, downloadTimeMetric_1.downloadTimeMetric)(data, argv, metricData);
+                }
             }
             else {
                 // 如果 download 为真，将其下载到 ./output 的一个文件下
@@ -91,6 +96,9 @@ module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
         else {
             if (argv.t) {
                 (0, commonUtils_1.printAllMetricOneTime)(data, argv);
+                if (argv.d) {
+                    yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, argv);
+                }
             }
             else {
                 console.log('Too much to print! Please select a time to get more specified info');

@@ -9,11 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.printAllMetricOneTime = exports.printTimeMetric = exports.printMetricData = exports.printRepoInfo = void 0;
-const downloadAllMetrics_1 = require("./downloadAllMetrics");
-const getAllMetrics_1 = require("./getAllMetrics");
-const getMetric_1 = require("./getMetric");
-const fs = require('fs');
+exports.printAllMetricOneTime = exports.printTimeMetric = exports.printMetricData = exports.printRepoInfo = exports.getDownloadPath = void 0;
+const getAllMetrics_1 = require("./getFromApi/getAllMetrics");
+const getMetric_1 = require("./getFromApi/getMetric");
+function getDownloadPath(data, time) {
+    const outputFolderPath = `./opendigger-output/${data.repo_author}/`;
+    const downloadUrl = outputFolderPath + `${data.repo_name}-${time}.md`;
+    return downloadUrl;
+}
+exports.getDownloadPath = getDownloadPath;
 function printRepoInfo(data) {
     console.log(`repo.author: ${data.repo_author}`);
     console.log(`repo.name: ${data.repo_name}`);
@@ -21,7 +25,7 @@ function printRepoInfo(data) {
 }
 exports.printRepoInfo = printRepoInfo;
 function printDataInColumns(data) {
-    let result = "";
+    let result = '';
     const keys = Object.keys(data);
     const values = Object.values(data);
     // 分成四列打印
@@ -68,11 +72,6 @@ function printAllMetricOneTime(data, argv) {
         const allMetrics = yield (0, getAllMetrics_1.getAllMetrics)(argv.r);
         const time = argv.t;
         console.log(`selected_time: ${time}`);
-        // 不能在 for 循环里面用否则会乱
-        const downloadUrl = (0, downloadAllMetrics_1.getDownloadPath)(data, time);
-        if (argv.d) {
-            yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, time);
-        }
         // 由于返回的是一个数组，所以我们需要逐个将其解析出来
         for (const eachMetric of allMetrics) {
             // 把两个 data 合并, 因为后面需要下载。其实这里一是为了和以上的 fork 与 star 的输出保持一致，二是方便获取repo link
@@ -83,23 +82,7 @@ function printAllMetricOneTime(data, argv) {
             const kv = `${key}: ${value}`;
             const kvLine = `${key}: ${value}\n`;
             const kvString = JSON.stringify(kv);
-            // console.log(`在特定时间 ${time} 查询的 ${key} 是 ${value}`)
-            // 如果 download 为真，将其下载到 ./output 的一个文件下
-            if (argv.d) {
-                try {
-                    // 获取文件地址开始写入
-                    fs.appendFile(downloadUrl, kvLine, (err) => {
-                        if (err) {
-                            console.error('Error writing file: ', err);
-                        }
-                    });
-                }
-                catch (error) {
-                    console.error('Error occurred while exporting the output: ', error);
-                    process.exit(1);
-                }
-            }
-            // 无论保不保存，直接在控制台上打印
+            // 打印
             console.log(kv);
         }
     });

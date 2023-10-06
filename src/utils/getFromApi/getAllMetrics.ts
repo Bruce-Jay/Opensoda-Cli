@@ -1,5 +1,5 @@
 // 引入 axios 库，用于发送 HTTP 请求
-const axios = require('axios');
+import axios from 'axios';
 
 export async function getAllMetrics(repository: string) {
 	// 查找指定仓库的 baseUrl

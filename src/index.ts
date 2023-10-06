@@ -10,7 +10,9 @@
 import init from './utils/init';
 import cli from './utils/cli';
 import { getGithubRepo } from './utils/getGithubRepo';
-import { downloadResult } from './utils/downloadResult';
+import { downloadResult } from './utils/downloadUtils/downloadResult';
+import { downloadTimeMetric } from './utils/downloadUtils/downloadTimeMetric';
+import { downloadAllMetrics } from './utils/downloadUtils/downloadAllMetrics';
 import { printMetricData, printTimeMetric, printRepoInfo, printAllMetricOneTime } from './utils/commonUtils';
 
 const input = cli.input;
@@ -71,7 +73,7 @@ module.exports = (async () => {
 		.usage('Usage: opendigger [options]')
 		.example(
 			'opendigger -r X-lab2017/oss101 -d -m openrank -t 2020-01-01',
-			'查询 X-lab2017/oss101 仓库在 2020-01-01 的 openrank 值，并将结果导出到 ./output 文件夹下'
+			'查询 X-lab2017/oss101 仓库在 2020-01-01 的 openrank 值，并将结果导出到 ./opendigger-output 文件夹下'
 		)
 		.epilog('Copyright © 2023 LazyAnasis. All Rights Reserved.').argv;
 
@@ -89,6 +91,9 @@ module.exports = (async () => {
             dataString += metricString
 			if (argv.t) {
                 printTimeMetric(argv.t, argv.m, metricData)
+				if (argv.d) {
+					await downloadTimeMetric(data, argv, metricData);
+				}
 			} else {
 				// 如果 download 为真，将其下载到 ./output 的一个文件下
 				if (argv.d) {
@@ -98,6 +103,9 @@ module.exports = (async () => {
 		} else {
 			if (argv.t) {
 				printAllMetricOneTime(data, argv)
+				if (argv.d) {
+					await downloadAllMetrics(data, argv);
+				}
 			} else {
 				console.log(
 					'Too much to print! Please select a time to get more specified info'
