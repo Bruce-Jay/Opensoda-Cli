@@ -29,19 +29,20 @@ Node version: 18.17.0
 
 ## Install
 
-If you want to run this project by downloading the source code, please install npm dependencies first.
+This repository uses pnpm as its package manager. Before starting to use it, make sure you have installed pnpm, which can be viewed by command `pnpm -v`, and if pnpm is not installed, just type in `npm i pnpm -g` to install it!
 
-You can install npm dependencies & do npm link by running these code:
+To install this tool, run pnpm install and pnpm link under the sorce code folder.
 
 ```bash
-npm install
-npm link
+pnpm install
+pnpm link
 ```
 
-or you can just install by npm:
+or you can just install by pnpm:
  ```bash
- npm install opensoda-cli
+ pnpm add opensoda-cli
  ```
+`npm i opensoda-cli -g` is also ok.
 
 ## Usage
 Run `opendigger -h` for detail.  
