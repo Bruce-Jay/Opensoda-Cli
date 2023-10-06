@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/License-MIT-blue) 
 ![](https://img.shields.io/badge/Node-v18.17.0-blue) 
 ![](https://img.shields.io/badge/pnpm-v8.6.12-orange) 
-[![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)](README-CN.md)
+[![](https://img.shields.io/badge/English-green)](README.md)
 
 <div align='left'>
 
@@ -30,12 +30,13 @@
 
 此项目使用pnpm作为包管理工具。在开始之前，确保您已经安装了pnpm, 您可以通过执行`pnpm -v`命令来查看是否已经安装。如果没有安装，执行  `npm i pnpm -g` 即可安装！
 
-在该项目文件夹下，运行pnpm install 和 pnpm link，即可安装opensoda-cli.
+在该项目文件夹下，运行`pnpm install` 和 `pnpm link .`，即可安装opensoda-cli.
 
 ```bash
 pnpm install
-pnpm link
+npm link 
 ```
+
 或者，你可以直接通过pnpm安装：
  ```bash
  pnpm add opensoda-cli
@@ -70,7 +71,7 @@ opendigger -r X-lab2017/oss101 -m activity -d
 ```
 ![](/public/cut1.gif)
 
-结果会保存在 `.output/[author/repo_name].md`。
+结果会保存在 `.opendigger-output/[author/repo_name].md`。
 
 你还可以指定查询时间，查询特定时间的指标。这条指令：
 ```bash
