@@ -1,7 +1,7 @@
 {
   "name": "opensoda-cli",
   "description": "Opendigger cli research tool, please feel free to explore indexes of repositories on Github!\n**Powered By X-lab2017**",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "bin": {
     "test-cli": "dist/index.js",
