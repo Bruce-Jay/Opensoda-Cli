@@ -102,7 +102,7 @@ opendigger -r=valhalla/valhalla -t=2022-10
 
 Now it is supported to search all of the metrics of all months:
 ```bash
-opendigger -r=valhalla/valhalla -t=2022-10
+opendigger -r=valhalla/valhalla
 ```
 
 ![cut5](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/0b8a64aa-f66b-4b03-b5b2-ed929bd56ba9)
