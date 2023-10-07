@@ -12,8 +12,9 @@ import cli from './utils/cli';
 import { getGithubRepo } from './utils/getGithubRepo';
 import { downloadResult } from './utils/downloadUtils/downloadResult';
 import { downloadTimeMetric } from './utils/downloadUtils/downloadTimeMetric';
-import { downloadAllMetrics } from './utils/downloadUtils/downloadAllMetrics';
-import { printMetricData, printTimeMetric, printRepoInfo, printAllMetricOneTime } from './utils/commonUtils';
+import { downloadAllMetricsOfOneTime } from './utils/downloadUtils/downloadAllMetricsOfOneTime';
+import { downloadAll } from './utils/downloadUtils/downloadAll';
+import { printMetricData, printTimeMetric, printRepoInfo, printAllMetricOneTime, printAllNumberKVMetric } from './utils/commonUtils';
 
 const input = cli.input;
 const flags = cli.flags;
@@ -89,27 +90,30 @@ module.exports = (async () => {
 		if (argv.m) {
             const {metricData, metricString} = await printMetricData(argv)
             dataString += metricString
-			if (argv.t) {
+			if (argv.t) { // opendigger -r=valhalla/valhalla -m=openrank -t=2023-xx
                 printTimeMetric(argv.t, argv.m, metricData)
-				if (argv.d) {
+				if (argv.d) { // opendigger -r=valhalla/valhalla -m=openrank -t=2023-xx -d
 					await downloadTimeMetric(data, argv, metricData);
 				}
 			} else {
 				// 如果 download 为真，将其下载到 ./output 的一个文件下
-				if (argv.d) {
+				if (argv.d) { // opendigger -r=valhalla/valhalla -m=openrank -d
                     await downloadResult(data, argv, metricData);
 				}
 			}
 		} else {
-			if (argv.t) {
+			if (argv.t) { // opendigger -r=valhalla/valhalla -t=2023-xx
 				printAllMetricOneTime(data, argv)
-				if (argv.d) {
-					await downloadAllMetrics(data, argv);
+				if (argv.d) { // opendigger -r=valhalla/valhalla -t=2023-xx -d
+					await downloadAllMetricsOfOneTime(data, argv);
 				}
 			} else {
-				console.log(
-					'Too much to print! Please select a time to get more specified info'
-				);
+				if (argv.d) { // opendigger -r=valhalla/valhalla -d
+					await downloadAll(data, argv)
+				} 
+				else { // opendigger -r=valhalla/valhalla
+					printAllNumberKVMetric(argv); // 打印所有的数值型 metric
+				}
 			}
 		}
 	} else {

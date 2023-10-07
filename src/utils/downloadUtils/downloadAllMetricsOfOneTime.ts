@@ -6,9 +6,7 @@ interface MetricIndexedData {
 	[metric: string]: any;
 }
 
-// 原来想在这里实现写入文件，发现不可行，因为有太多键值，无法一一取出，所以这里就做一个文件写入是否合法检测吧！
-// 同时，因为我们 for 循环里面写入只能 append 所以每次生成一个新的文件需要先清空
-export async function downloadAllMetrics(data: any, argv: any) {
+export async function downloadAllMetricsOfOneTime(data: any, argv: any) {
 	const outputFolderPath = `./opendigger-output/${data.repo_author}/`;
 	const downloadUrl = outputFolderPath + `${data.repo_name}-${argv.t}.md`;
 

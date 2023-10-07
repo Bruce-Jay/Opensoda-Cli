@@ -1,11 +1,11 @@
 # Opendigger Data Analysis - valhalla/valhalla
 ### Repo
-repo_author: valhalla
-repo_name: valhalla
-repo_url: https://github.com/valhalla/valhalla
+`repo_author`: valhalla
+`repo_name`: valhalla
+`repo_url`: https://github.com/valhalla/valhalla
 
 ### Metric
-metric_name: openrank
+#### metric_name: openrank
 ![openrank trends](./openrank.png)
 | Dates and openrank: | | | |
 | --- | --- | --- | --- |

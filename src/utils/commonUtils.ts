@@ -1,4 +1,3 @@
-import { downloadAllMetrics } from './downloadUtils/downloadAllMetrics';
 import { getAllMetrics } from './getFromApi/getAllMetrics';
 import { getMetric } from './getFromApi/getMetric';
 import * as fs from 'fs';
@@ -42,7 +41,7 @@ function printDataInColumns(data: MetricIndexedData) {
 			if (index < keys.length) {
 				const key = keys[index];
 				const value = values[index];
-				rowString += `${key}: ${value.toFixed(2)}\t\t`;
+				rowString += `${key}: ${value}\t\t`;
 			}
 		}
 		result += rowString + '\n';
@@ -98,5 +97,42 @@ export async function printAllMetricOneTime(
 
 		// 打印
 		console.log(kv);
+	}
+}
+
+export async function printAllNumberKVMetric(argv: any) {
+	const numberKVNames = [
+		'openrank',
+		'activity',
+		'attention',
+		'stars',
+		'technical_fork',
+		'participants',
+		'inactive_contributors',
+		'bus_factor',
+		'issues_new',
+		'issues_closed',
+		'issue_comments',
+		'code_change_lines_add',
+		'code_change_lines_remove',
+		'code_change_lines_sum',
+		'change_requests',
+		'change_requests_accepted',
+		'change_requests_reviews'
+	];
+
+	const allMetrics: MetricIndexedData[] = await getAllMetrics(argv.r);
+	for (const eachMetric of allMetrics) {
+		const metricName = Object.keys(eachMetric)[0];
+		const metricData: MetricIndexedData = eachMetric[metricName];
+
+		for (const numberKV of numberKVNames) {
+			if (numberKV === metricName) {
+				let metricString: string = `metric: ${metricName}\n`;
+				metricString += printDataInColumns(metricData);
+
+				console.log(metricString);
+			}
+		}
 	}
 }
