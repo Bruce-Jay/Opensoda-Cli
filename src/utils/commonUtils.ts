@@ -33,14 +33,18 @@ function printDataInColumns(data: MetricIndexedData) {
 	const values = Object.values(data);
 	// 分成四列打印
 	const rows = Math.ceil(keys.length / 4);
+	let metricArr = Object.entries(data);
+	if (metricArr[metricArr.length - 1][0].includes('raw')) {
+		metricArr = metricArr.slice(0, metricArr.length - 1);
+	}
 
 	for (let row = 0; row < rows; row++) {
 		let rowString: string = ``;
 		for (let column = 0; column < 4; column++) {
 			const index = row + column * rows;
-			if (index < keys.length) {
-				const key = keys[index];
-				const value = values[index];
+			if (index < metricArr.length) {
+				const key = metricArr[index][0];
+				const value = metricArr[index][1];
 				rowString += `${key}: ${value}\t\t`;
 			}
 		}

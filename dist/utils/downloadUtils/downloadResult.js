@@ -40,6 +40,10 @@ function renderChart(metric, metricData) {
     // 使用 echarts, canvas + SSR
     const canvas = (0, canvas_1.createCanvas)(800, 600);
     const chart = echarts.init(canvas);
+    let metricArr = Object.entries(metricData);
+    if (metricArr[metricArr.length - 1][0].includes('raw')) {
+        metricArr = metricArr.slice(0, metricArr.length - 1);
+    }
     const option = {
         title: {
             text: `${metric} trends`,
@@ -47,7 +51,6 @@ function renderChart(metric, metricData) {
         xAxis: {
             name: 'Time',
             type: 'category',
-            data: Object.keys(metricData),
         },
         yAxis: {
             name: `${metric} value`,
@@ -56,7 +59,7 @@ function renderChart(metric, metricData) {
         series: [
             {
                 name: `${metric}`,
-                data: Object.values(metricData),
+                data: metricArr,
                 type: 'line',
                 lineStyle: {
                     color: 'red',
@@ -126,15 +129,27 @@ function downloadResult(data, argv, metricData) {
             const keys = Object.keys(metricData);
             const values = Object.values(metricData);
             const rows = Math.ceil(keys.length / 4);
+            let metricArr = Object.entries(metricData);
+            if (metricArr[metricArr.length - 1][0].includes('raw')) {
+                metricArr = metricArr.slice(0, metricArr.length - 1);
+            }
             for (let row = 0; row < rows; row++) {
                 let rowString = ``;
                 for (let column = 0; column < 4; column++) {
                     const index = row + column * rows;
-                    if (index < keys.length) {
-                        const key = keys[index];
-                        const value = values[index];
+                    if (index < metricArr.length) {
+                        const key = metricArr[index][0];
+                        const value = metricArr[index][1];
                         rowString += `|${key}: ${value}`;
                     }
+                    // else if (index === keys.length - 1) {
+                    // 	const key = keys[index];
+                    // 	if (key.includes('raw')) {
+                    // 		return;
+                    // 	}
+                    // 	const value = values[index];
+                    // 	rowString += `|${key}: ${value}|\n`;
+                    // }
                 }
                 result += rowString + '|\n';
             }

@@ -40,26 +40,20 @@ module.exports = (async () => {
 		.options({
 			r: {
 				alias: 'repository',
-				demand: false,
-				describe: '指定查询的仓库，默认为 X-lab2017/oss101',
-				type: 'string'
-			},
-			u: {
-				alias: 'user',
-				demand: false,
-				describe: '查询特定的用户，默认为 X-lab2017',
+				demand: true,
+				describe: '指定查询的仓库',
 				type: 'string'
 			},
 			d: {
 				alias: 'download',
 				demand: false,
-				describe: '是否将结果导出，输入此选择，即为true',
+				describe: '是否将结果导出，输入此选项，即为 true',
 				type: 'boolean'
 			},
 			m: {
 				alias: 'metric',
 				demand: false,
-				describe: '是否查询特殊的metric，默认为openrank',
+				describe: '是否指定 metric 查询',
 				type: 'string'
 			},
 			t: {
@@ -73,8 +67,8 @@ module.exports = (async () => {
 		.alias('h', 'help')
 		.usage('Usage: opendigger [options]')
 		.example(
-			'opendigger -r X-lab2017/oss101 -d -m openrank -t 2020-01-01',
-			'查询 X-lab2017/oss101 仓库在 2020-01-01 的 openrank 值，并将结果导出到 ./opendigger-output 文件夹下'
+			'opendigger -r X-lab2017/oss101 -d -m openrank -t 2023-01',
+			'查询 X-lab2017/oss101 仓库在 2023-01 的 openrank 值，并将结果导出到 ./opendigger-output 文件夹下'
 		)
 		.epilog('Copyright © 2023 LazyAnasis. All Rights Reserved.').argv;
 
