@@ -45,6 +45,7 @@ export async function getAllMetrics(repository: string) {
 			);
 		}
 	}
+	console.log('\n');
 	// console.log(jsonData);
 	return jsonData;
 }
