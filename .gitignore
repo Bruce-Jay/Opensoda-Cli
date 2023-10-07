@@ -4,8 +4,6 @@
 node_modules/
 /node_modules/
 
-dist/
-
 # Packages #
 ############
 *.7z
