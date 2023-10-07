@@ -24,7 +24,8 @@ const cli_1 = __importDefault(require("./utils/cli"));
 const getGithubRepo_1 = require("./utils/getGithubRepo");
 const downloadResult_1 = require("./utils/downloadUtils/downloadResult");
 const downloadTimeMetric_1 = require("./utils/downloadUtils/downloadTimeMetric");
-const downloadAllMetrics_1 = require("./utils/downloadUtils/downloadAllMetrics");
+const downloadAllMetricsOfOneTime_1 = require("./utils/downloadUtils/downloadAllMetricsOfOneTime");
+const downloadAll_1 = require("./utils/downloadUtils/downloadAll");
 const commonUtils_1 = require("./utils/commonUtils");
 const input = cli_1.default.input;
 const flags = cli_1.default.flags;
@@ -80,28 +81,33 @@ module.exports = (() => __awaiter(void 0, void 0, void 0, function* () {
         if (argv.m) {
             const { metricData, metricString } = yield (0, commonUtils_1.printMetricData)(argv);
             dataString += metricString;
-            if (argv.t) {
+            if (argv.t) { // opendigger -r=valhalla/valhalla -m=openrank -t=2023-xx
                 (0, commonUtils_1.printTimeMetric)(argv.t, argv.m, metricData);
-                if (argv.d) {
+                if (argv.d) { // opendigger -r=valhalla/valhalla -m=openrank -t=2023-xx -d
                     yield (0, downloadTimeMetric_1.downloadTimeMetric)(data, argv, metricData);
                 }
             }
             else {
                 // 如果 download 为真，将其下载到 ./output 的一个文件下
-                if (argv.d) {
+                if (argv.d) { // opendigger -r=valhalla/valhalla -m=openrank -d
                     yield (0, downloadResult_1.downloadResult)(data, argv, metricData);
                 }
             }
         }
         else {
-            if (argv.t) {
+            if (argv.t) { // opendigger -r=valhalla/valhalla -t=2023-xx
                 (0, commonUtils_1.printAllMetricOneTime)(data, argv);
-                if (argv.d) {
-                    yield (0, downloadAllMetrics_1.downloadAllMetrics)(data, argv);
+                if (argv.d) { // opendigger -r=valhalla/valhalla -t=2023-xx -d
+                    yield (0, downloadAllMetricsOfOneTime_1.downloadAllMetricsOfOneTime)(data, argv);
                 }
             }
             else {
-                console.log('Too much to print! Please select a time to get more specified info');
+                if (argv.d) { // opendigger -r=valhalla/valhalla -d
+                    yield (0, downloadAll_1.downloadAll)(data, argv);
+                }
+                else { // opendigger -r=valhalla/valhalla
+                    (0, commonUtils_1.printAllNumberKVMetric)(argv); // 打印所有的数值型 metric
+                }
             }
         }
     }

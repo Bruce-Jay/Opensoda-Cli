@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.printAllMetricOneTime = exports.printTimeMetric = exports.printMetricData = exports.printRepoInfo = exports.getDownloadPath = void 0;
+exports.printAllNumberKVMetric = exports.printAllMetricOneTime = exports.printTimeMetric = exports.printMetricData = exports.printRepoInfo = exports.getDownloadPath = void 0;
 const getAllMetrics_1 = require("./getFromApi/getAllMetrics");
 const getMetric_1 = require("./getFromApi/getMetric");
 function getDownloadPath(data, time) {
@@ -37,7 +37,7 @@ function printDataInColumns(data) {
             if (index < keys.length) {
                 const key = keys[index];
                 const value = values[index];
-                rowString += `${key}: ${value.toFixed(2)}\t\t`;
+                rowString += `${key}: ${value}\t\t`;
             }
         }
         result += rowString + '\n';
@@ -88,3 +88,39 @@ function printAllMetricOneTime(data, argv) {
     });
 }
 exports.printAllMetricOneTime = printAllMetricOneTime;
+function printAllNumberKVMetric(argv) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const numberKVNames = [
+            'openrank',
+            'activity',
+            'attention',
+            'stars',
+            'technical_fork',
+            'participants',
+            'inactive_contributors',
+            'bus_factor',
+            'issues_new',
+            'issues_closed',
+            'issue_comments',
+            'code_change_lines_add',
+            'code_change_lines_remove',
+            'code_change_lines_sum',
+            'change_requests',
+            'change_requests_accepted',
+            'change_requests_reviews'
+        ];
+        const allMetrics = yield (0, getAllMetrics_1.getAllMetrics)(argv.r);
+        for (const eachMetric of allMetrics) {
+            const metricName = Object.keys(eachMetric)[0];
+            const metricData = eachMetric[metricName];
+            for (const numberKV of numberKVNames) {
+                if (numberKV === metricName) {
+                    let metricString = `metric: ${metricName}\n`;
+                    metricString += printDataInColumns(metricData);
+                    console.log(metricString);
+                }
+            }
+        }
+    });
+}
+exports.printAllNumberKVMetric = printAllNumberKVMetric;

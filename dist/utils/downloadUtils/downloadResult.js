@@ -45,10 +45,12 @@ function renderChart(metric, metricData) {
             text: `${metric} trends`,
         },
         xAxis: {
+            name: 'Time',
             type: 'category',
             data: Object.keys(metricData),
         },
         yAxis: {
+            name: `${metric} value`,
             type: 'value',
         },
         series: [
@@ -94,20 +96,28 @@ function downloadResult(data, argv, metricData) {
                     console.error(`Error occurred while creating ${data.repo_name}.md file:`, error);
                 }
             }
+            else {
+                // 清空文件
+                fs.truncate(downloadUrl, 0, (err) => {
+                    if (err) {
+                        console.log('Error cleaning files:', err);
+                    }
+                });
+            }
             let outputData = `# Opendigger Data Analysis - ${data.repo_author}/${data.repo_name}\n` +
                 `### Repo\n` +
-                `repo_author: ${data.repo_author}\n` +
-                `repo_name: ${data.repo_name}\n` +
-                `repo_url: ${data.repo_url}\n` +
+                `\`repo_author\`: ${data.repo_author}\n` +
+                `\`repo_name\`: ${data.repo_name}\n` +
+                `\`repo_url\`: ${data.repo_url}\n` +
                 `### Metric\n` +
-                `metric_name: ${argv.m}\n`;
+                `#### metric_name: ${argv.m}\n`;
             // 使用 canvas 生成图片
             fs.writeFile(`${outputFolderPath}${argv.m}.png`, renderChart(argv.m, metricData).toBuffer('image/png'), (err) => {
                 if (err) {
                     console.error('Error writing file: ', err);
                 }
                 else {
-                    console.log(`File saved successfully at ${outputFolderPath}/${argv.m}.png`);
+                    console.log(`File saved successfully at ${outputFolderPath}${argv.m}.png`);
                 }
             });
             const chartImage = `![${argv.m} trends](./${argv.m}.png)\n`;
@@ -123,7 +133,7 @@ function downloadResult(data, argv, metricData) {
                     if (index < keys.length) {
                         const key = keys[index];
                         const value = values[index];
-                        rowString += `|${key}: ${value.toFixed(2)}`;
+                        rowString += `|${key}: ${value}`;
                     }
                 }
                 result += rowString + '|\n';

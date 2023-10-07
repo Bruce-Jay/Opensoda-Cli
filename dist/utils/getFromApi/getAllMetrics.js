@@ -57,6 +57,7 @@ function getAllMetrics(repository) {
                 console.error(`Error fetching data from ${fileName}: `, error.message);
             }
         }
+        console.log('\n');
         // console.log(jsonData);
         return jsonData;
     });
