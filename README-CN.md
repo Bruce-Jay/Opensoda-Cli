@@ -60,7 +60,7 @@ npm i opensoda-cli -g
 ```bash
 opendigger -r=valhalla/valhalla -m=openrank
 ```
-![](/public/cut1.gif)
+![cut1](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/a8cf4a43-b6e2-47b5-bc91-e93c18cc1a93)
 
 如果想要查询其他仓库，运行`opendigger -r <author/repo_name> -m openrank`就可以了。这里`-r`表示仓库地址，`-m`表示要查询的指标。
 
@@ -72,7 +72,7 @@ opendigger -r=valhalla/valhalla -m=openrank
 ```bash
 opendigger -r=valhalla/valhalla -m=openrank -d
 ```
-![](/public/cut2.gif)
+![cut2](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/246d9fb6-85d7-432a-927a-0d7678bd8477)
 
 导出的markdown报告包含了所查询的数据以及echarts生成的图片，报告和图片都保存在 `./opendigger-output/`下。
 
@@ -82,30 +82,30 @@ opendigger -r=valhalla/valhalla -m=openrank -t=2022-10
 ```
 将返回仓库`valhalla/valhalla`2023年7月的`openrank`值，并保存。
 
-![](/public/cut3.gif)
+![cut3](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/ac37eb6d-ee16-41ee-9a04-67909ec315c1)
 
 这款工具还支持查询同一时间的的所有指标，只要不指定`-m`即可。尝试以下指令：
 
 ```bash
 opendigger -r=valhalla/valhalla -t=2022-10
 ```
-![](/public/cut4.gif)
+![cut4](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/f9e0e1df-b188-43b5-9204-05c2bf405b24)
 
 现已支持查询仓库所有指标在所有时间上的值：
 ```bash
 opendigger -r=valhalla/valhalla
 ```
-![](/public/cut5.gif)
+![cut5](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/0b8a64aa-f66b-4b03-b5b2-ed929bd56ba9)
 查询仓库在所有指标上的每月的数值，并导出可视化报告。
 ```bash
 opendigger -r=valhalla/valhalla -d
 ```
-![](/public/cut6.gif)
+![cut6](https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/a4253fc2-da3a-47ef-9dbf-c4b34c011d21)
 
 ### 在线体验 😋
 为了帮助大家零门槛体验我们的工具，我们用react+antd开发了一个在线体验版的网页。
 
 网页界面如下：
-![](/public/web.png)
+<img width="1393" alt="web" src="https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/297780b7-b2a4-41a5-8965-8e865a86ad7b">
 
 本项目仍在迭代更新中~
