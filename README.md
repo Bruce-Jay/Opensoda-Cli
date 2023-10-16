@@ -121,4 +121,4 @@ To help experience this tool with no difficulties, we developed a website. This 
 
 <img width="1393" alt="web" src="https://github.com/Bruce-Jay/Opensoda-Cli/assets/90242019/297780b7-b2a4-41a5-8965-8e865a86ad7b">
 
-More features are coming soon~
+And now you can have a try with visiting http://opendigger.info !
